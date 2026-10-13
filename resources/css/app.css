@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+
+    --color-ink-950: #07070c;
+    --color-ink-900: #0c0c14;
+    --color-ink-850: #11111b;
+    --color-ink-800: #161622;
+    --color-ink-700: #22222f;
+    --color-ink-600: #2e2e3e;
+    --color-ink-400: #6b6b80;
+    --color-ink-300: #9a9aae;
+    --color-ink-200: #c7c7d4;
+    --color-ink-100: #e9e9f1;
+
+    --color-laya-300: #c4b5fd;
+    --color-laya-400: #a78bfa;
+    --color-laya-500: #8b5cf6;
+    --color-laya-600: #7c3aed;
+    --color-glow: #22d3ee;
+}
+
+@layer base {
+    html {
+        color-scheme: dark;
+    }
+
+    body {
+        @apply bg-ink-950 font-sans text-ink-100 antialiased;
+    }
+
+    ::selection {
+        @apply bg-laya-500/40;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    .panel {
+        @apply rounded-2xl border border-white/[0.07] bg-ink-900/70 shadow-2xl shadow-black/40 backdrop-blur-xl;
+    }
+
+    .label {
+        @apply mb-1.5 block text-[11px] font-semibold tracking-[0.12em] text-ink-400 uppercase;
+    }
+
+    .field {
+        @apply w-full rounded-xl border border-white/[0.08] bg-ink-950/60 px-3.5 py-2.5 text-sm text-ink-100 placeholder:text-ink-400/70 transition outline-none focus:border-laya-500/60 focus:ring-4 focus:ring-laya-500/15;
+    }
+
+    .chip {
+        @apply inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs text-ink-200 transition hover:border-laya-400/40 hover:bg-laya-500/10 hover:text-white;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-laya-500 to-laya-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-laya-600/30 ring-1 ring-white/15 ring-inset transition hover:brightness-110 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-ink-300 transition hover:bg-white/5 hover:text-white;
+    }
+
+    .tab {
+        @apply relative rounded-lg px-3.5 py-1.5 text-sm font-medium text-ink-300 transition hover:text-white;
+    }
+
+    .tab[aria-selected='true'] {
+        @apply bg-white/[0.08] text-white shadow-inner;
+    }
+
+    .bar-track {
+        @apply h-2 overflow-hidden rounded-full bg-white/[0.06];
+    }
+
+    .bar-fill {
+        @apply h-full rounded-full bg-ink-600 transition-[width] duration-700 ease-out;
+    }
+
+    .bar-fill.top {
+        @apply bg-gradient-to-r from-laya-500 to-glow;
+    }
+
+    .code {
+        @apply overflow-auto rounded-xl border border-white/[0.06] bg-ink-950/80 p-4 font-mono text-[12.5px] leading-relaxed text-ink-200;
+    }
+}
+
+/* Backdrop: soft aurora and a faint grid. */
+.aurora {
+    background:
+        radial-gradient(60rem 30rem at 15% -10%, rgb(139 92 246 / 0.22), transparent 60%),
+        radial-gradient(50rem 25rem at 95% 0%, rgb(34 211 238 / 0.12), transparent 60%),
+        radial-gradient(40rem 30rem at 50% 110%, rgb(124 58 237 / 0.10), transparent 60%);
+}
+
+.grid-bg {
+    background-image:
+        linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
+}
+
+/* highlight.js tokens, tuned to the palette. */
+.hljs-keyword, .hljs-meta .hljs-keyword { color: #c4b5fd; }
+.hljs-title, .hljs-title.class_, .hljs-title.function_ { color: #67e8f9; }
+.hljs-string { color: #86efac; }
+.hljs-number, .hljs-literal { color: #fdba74; }
+.hljs-comment { color: #6b6b80; font-style: italic; }
+.hljs-meta, .hljs-attr { color: #f0abfc; }
+.hljs-variable { color: #fca5a5; }
+.hljs-type, .hljs-built_in { color: #93c5fd; }
+.hljs-attribute, .hljs-property { color: #a5b4fc; }
+
+@keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+}
+
+.shimmer {
+    background: linear-gradient(90deg, rgb(255 255 255 / 0.03) 25%, rgb(255 255 255 / 0.09) 50%, rgb(255 255 255 / 0.03) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+}
